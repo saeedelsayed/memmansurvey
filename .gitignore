@@ -5,3 +5,4 @@ scripts/__pycache__
 tests/alloc_tests/results/plots/
 *.csr
 **/.DS_Store
+results/
