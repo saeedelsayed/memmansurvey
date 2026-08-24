@@ -21,7 +21,8 @@ def main():
 		Command("cmake -B sync_build -D{}=ON -DSYNC_BUILD=ON".format(sync_flag)).run()
 		Command("msbuild sync_build/GPUMemoryManagers.sln /p:Configuration=Release").run()
 	else: # If on Linux
-		Command("mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release -D{}=ON -DSYNC_BUILD=OFF".format(async_flag)).run()
+		Command("mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=g++-13 \
+				-DCMAKE_CUDA_HOST_COMPILER=g++-13 -D{}=ON -DSYNC_BUILD=OFF".format(async_flag)).run()
 		Command("cd build && make -kj").run()
 		Command("mkdir sync_build && cd sync_build && cmake .. -DCMAKE_BUILD_TYPE=Release -D{}=ON -DSYNC_BUILD=ON".format(sync_flag)).run()
 		Command("cd sync_build && make -kj").run()
